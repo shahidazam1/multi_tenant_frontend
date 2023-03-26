@@ -3,12 +3,12 @@ import Cookies from "js-cookie";
 
 Cookies.set("name", "shahid");
 export const http = axios.create({
-  baseURL: "http://localhost:8800",
+  baseURL: "http://localhost:880",
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("token")}` || "",
+    Authorization: `Bearer ${Cookies.get("token")}` || "",
     // cookie: Cookies.get("data") || "",
-    Cookies: Cookies.get("data") || "",
+    tenantId: Cookies.get("tenantId") || "",
   },
 });
 

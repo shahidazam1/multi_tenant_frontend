@@ -9,10 +9,17 @@ const signin = (data) => {
 };
 
 const profile = () => {
-  return http.get("/profile/my-profile");
+  return http.get("/profile");
 };
 const addProfile = (data) => {
   return http.post("/profile", data);
 };
 
-export { signup, signin, profile, addProfile };
+const tenant = () => {
+  return http.get("/tenant");
+};
+const addtenant = (data) => {
+  return http.post("/tenant", data);
+};
+
+export { signup, signin, profile, addProfile, addtenant, tenant };

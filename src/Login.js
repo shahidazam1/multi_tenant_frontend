@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { useState } from "react";
 import { useMutation } from "react-query";
 import { signin } from "./api/services/signup";
@@ -10,8 +11,11 @@ const Login = () => {
 
   const { mutate, isLoading } = useMutation(signin, {
     onSuccess: (res) => {
-      localStorage.setItem("token", res.data.token);
-      window.location.href = "/profile";
+      Cookies.set("token", res.data.token);
+      Cookies.set("tenantId", res?.data?.tenant?._id);
+      Cookies.set("subDomain", res?.data?.tenant?.subdomain);
+      window.location.href = `http://${res?.data?.tenant?.subdomain}.localhost:3000/profile`;
+      window.location.href = `http://${res?.data?.tenant?.subdomain}.localhost:3000/profile`;
     },
     onError: (err) => console.log(err),
   });
@@ -24,6 +28,7 @@ const Login = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <label>name</label>
         <input
           type="text"
           name="name"
@@ -31,6 +36,8 @@ const Login = () => {
           onChange={handleChange}
           value={state.name}
         />
+        <br />
+        <label>password</label>
         <input
           type="text"
           name="password"
@@ -38,6 +45,7 @@ const Login = () => {
           onChange={handleChange}
           value={state.password}
         />
+        <br />
         <button type="submit">submit </button>
       </form>
     </div>
