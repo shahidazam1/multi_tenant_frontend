@@ -21,6 +21,7 @@ const SignUp = () => {
       Cookies.set("tenantId", res?.data?.tenant?._id);
       Cookies.set("subDomain", res?.data?.tenant?.subdomain);
       window.location.href = `http://${res?.data?.tenant?.subdomain}.localhost:3000/profile`;
+      window.location.href = `http://${res?.data?.tenant?.subdomain}.localhost:3000/profile`;
     },
     onError: (err) => console.log(err),
   });

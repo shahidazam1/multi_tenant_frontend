@@ -8,6 +8,9 @@ const Layout = () => {
         <Link style={{ marginLeft: "20px" }} to="/profile">
           profile
         </Link>
+        <Link style={{ marginLeft: "20px" }} to="/address">
+          address
+        </Link>
         <Link style={{ marginLeft: "20px" }} to="/signup">
           signup
         </Link>

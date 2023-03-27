@@ -5,6 +5,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import Address from "./Address";
 import Layout from "./Layout";
 import Login from "./Login";
 import Profile from "./Profile";
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
+      },
+      {
+        path: "address",
+        element: <Address />,
       },
       {
         path: "login",

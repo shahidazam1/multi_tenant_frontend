@@ -22,4 +22,19 @@ const addtenant = (data) => {
   return http.post("/tenant", data);
 };
 
-export { signup, signin, profile, addProfile, addtenant, tenant };
+const address = () => {
+  return http.get("/address");
+};
+const addaddress = (data) => {
+  return http.post("/address", data);
+};
+export {
+  signup,
+  signin,
+  profile,
+  addProfile,
+  addtenant,
+  tenant,
+  address,
+  addaddress,
+};

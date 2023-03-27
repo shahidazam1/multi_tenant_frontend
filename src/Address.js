@@ -1,15 +1,20 @@
-import { addProfile, profile } from "./api/services/signup";
+import {
+  addaddress,
+  addProfile,
+  address,
+  profile,
+} from "./api/services/signup";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useState } from "react";
 
-const Profile = () => {
+const Address = () => {
   const [dat, setDat] = useState("");
   const queryClient = useQueryClient();
-  const { data, isLoading } = useQuery("profile", profile);
+  const { data, isLoading } = useQuery("address", address);
 
-  const { mutate } = useMutation(addProfile, {
+  const { mutate } = useMutation(addaddress, {
     onSuccess: (res) => {
-      queryClient.invalidateQueries("profile");
+      queryClient.invalidateQueries("address");
       setDat("");
     },
     onError: (err) => console.log(err),
@@ -17,7 +22,7 @@ const Profile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutate({ note: dat });
+    mutate({ address: dat });
   };
 
   return (
@@ -25,7 +30,7 @@ const Profile = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="note"
+          name="address"
           value={dat}
           onChange={(e) => setDat(e.target.value)}
         />
@@ -34,7 +39,7 @@ const Profile = () => {
       <div style={{ marginTop: "20px" }}>
         {data?.data?.map((item) => (
           <div style={{ border: "2px solid black", padding: "10px" }}>
-            <div>{item?.note}</div>
+            <div>{item?.address}</div>
           </div>
         ))}
       </div>
@@ -42,4 +47,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Address;
