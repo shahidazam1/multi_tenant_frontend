@@ -1,13 +1,11 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-Cookies.set("name", "shahid");
 export const http = axios.create({
   baseURL: "http://localhost:880",
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${Cookies.get("token")}` || "",
-    // cookie: Cookies.get("data") || "",
     tenantId: Cookies.get("tenantId") || "",
   },
 });

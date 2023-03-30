@@ -1,10 +1,16 @@
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { signin } from "./api/services/signup";
 
 const Login = () => {
   const [state, setState] = useState({ name: "", password: "" });
+  const [resData, setResData] = useState({
+    token: "",
+    tenantId: "",
+    subDomain: "",
+  });
+  const [isLogedIn, setIsLogedIn] = useState(false);
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
@@ -15,10 +21,25 @@ const Login = () => {
       Cookies.set("tenantId", res?.data?.tenant?._id);
       Cookies.set("subDomain", res?.data?.tenant?.subdomain);
       window.location.href = `http://${res?.data?.tenant?.subdomain}.localhost:3000/profile`;
-      window.location.href = `http://${res?.data?.tenant?.subdomain}.localhost:3000/profile`;
+      setResData({
+        token: res.data.token,
+        tenantId: res?.data?.tenant?._id,
+        subDomain: res?.data?.tenant?.subdomain,
+      });
+      setIsLogedIn(true);
     },
     onError: (err) => console.log(err),
   });
+
+  useEffect(() => {
+    if (resData.token) {
+      window.location.href = `http://${resData?.subDomain}.localhost:3000/profile`;
+
+      Cookies.set("token", resData.token);
+      Cookies.set("tenantId", resData?.tenantId);
+      Cookies.set("subDomain", resData?.subDomain);
+    }
+  }, [isLogedIn]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
